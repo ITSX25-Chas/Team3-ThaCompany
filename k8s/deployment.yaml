@@ -58,6 +58,13 @@ spec:
             port: 7000
           initialDelaySeconds: 3
           periodSeconds: 5
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
         volumeMounts:
         - name: data
           mountPath: /app/data

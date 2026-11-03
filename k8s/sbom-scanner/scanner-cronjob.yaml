@@ -37,7 +37,7 @@ spec:
             - name: LABEL_SELECTOR
               value: "app=company-website"
             - name: FALLBACK_IMAGE
-              value: "ghcr.io/kurs6-projekt/team3-thacompany:latest"
+              value: "ghcr.io/itsx25-chas/team3-thacompany:latest"
             - name: TRIVY_VERSION
               value: "0.75.0"
             # ------------------------------------
@@ -78,7 +78,7 @@ spec:
               # Verify the GitHub OIDC identity before trusting the SBOM.
               cosign verify-attestation \
                 --type cyclonedx \
-                --certificate-identity-regexp '^https://github\.com/Kurs6-Projekt/Team3-ThaCompany/\.github/workflows/deploy\.yml@refs/heads/main$' \
+                --certificate-identity-regexp '^https://github\.com/ITSX25-Chas/Team3-ThaCompany/\.github/workflows/deploy\.yml@refs/heads/main$' \
                 --certificate-oidc-issuer 'https://token.actions.githubusercontent.com' \
                 "$IMAGE" > /tmp/verified-attestations.json
               jq -er '.payload' /tmp/verified-attestations.json \

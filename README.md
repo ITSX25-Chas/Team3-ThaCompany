@@ -32,7 +32,7 @@ Never commit a real key or put it in a tracked file.
 ## Security configuration
 
 - The GitHub Actions secret `APP_SECRET_KEY` supplies the deployed app key. The deploy workflow syncs it into Kubernetes as `company-website-secrets`; do not create a separate copy by hand.
-- To configure it in another clone, generate and upload a key with `openssl rand -hex 32 | gh secret set APP_SECRET_KEY --repo Kurs6-Projekt/Team3-ThaCompany`. Rotating it signs users out.
+- To configure it in another clone, generate and upload a key with `openssl rand -hex 32 | gh secret set APP_SECRET_KEY --repo ITSX25-Chas/Team3-ThaCompany`. Rotating it signs users out.
 - CSRF protection is enabled globally for state-changing requests. Forms include a token, and the email preview request sends it in the `X-CSRFToken` header.
 - Session cookies are `HttpOnly` and `SameSite=Lax`. Set `SESSION_COOKIE_SECURE=true` when the site is served over HTTPS. It is currently `false` because the internal ingress uses HTTP.
 

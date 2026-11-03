@@ -29,6 +29,15 @@ def test_index(client):
     assert response.status_code == 200
 
 
+def test_security_headers(client):
+    response = client.get('/')
+    assert response.headers['X-Content-Type-Options'] == 'nosniff'
+    assert response.headers['X-Frame-Options'] == 'DENY'
+    assert response.headers['Referrer-Policy'] == 'strict-origin-when-cross-origin'
+    assert "frame-ancestors 'none'" in response.headers['Content-Security-Policy']
+    assert response.headers['Permissions-Policy'] == 'camera=(), microphone=(), geolocation=()'
+
+
 def test_login_page(client):
     response = client.get('/login')
     assert response.status_code == 200
