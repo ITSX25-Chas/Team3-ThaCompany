@@ -23,6 +23,19 @@ def create_app():
     app.register_blueprint(auth_bp)
     app.register_blueprint(main_bp)
 
+    @app.after_request
+    def add_security_headers(response):
+        response.headers['Content-Security-Policy'] = (
+            "default-src 'self'; object-src 'none'; frame-ancestors 'none'; "
+            "base-uri 'self'; form-action 'self'; "
+            "script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
+        )
+        response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+        response.headers['X-Content-Type-Options'] = 'nosniff'
+        response.headers['X-Frame-Options'] = 'DENY'
+        response.headers['Permissions-Policy'] = 'camera=(), microphone=(), geolocation=()'
+        return response
+
     init_db()
     init_legacy_db()
 
